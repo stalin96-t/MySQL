@@ -73,8 +73,15 @@ CASE
 END AS Bonus
 FROM employee_salary;
 
--- Practice 
 
+
+SELECT
+  gender,
+    COUNT(*) AS total_employees,
+    SUM(CASE WHEN gender = 'Male' THEN 1 ELSE 0 END) AS male_count,
+    SUM(CASE WHEN gender = 'Female' THEN 1 ELSE 0 END) AS female_count
+FROM employee_demographics
+GROUP BY GENDER;
 
 -- =====================================
 
@@ -128,6 +135,8 @@ FROM sales_db1.orders
 GROUP BY DATE_FORMAT(order_date, '%Y-%m')
 ORDER BY month;
 
+
+-- CTE 
 WITH monthly_sales AS (
 SELECT
 DATE_FORMAT(order_date, '%Y-%m') AS month,
@@ -155,8 +164,5 @@ SELECT
         THEN 'Above Average'
         ELSE 'Below Average'
     END AS salary_status
-FROM parks_and_recreation.employee_salary;
-
-
-
-
+FROM parks_and_recreation.employee_salary
+;
